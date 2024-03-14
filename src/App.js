@@ -5,9 +5,12 @@ import Adduser from './component/Adduser.js';
 import UserListing from "./component/UserListing.js";
 import UpdateUser from "./component/UpdateUser.js";
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import Store from '../src/Redux/Store.js';
 
 function App() {
   return (
+    <Provider store={Store} >
     <div className="App">
       <BrowserRouter>
       <div className='header'>
@@ -18,11 +21,12 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/user" element={<UserListing />}></Route>
         <Route path="/user/add" element={<Adduser />}></Route>
-        <Route path="/user/add" element={<UpdateUser />}></Route>
+        <Route path="/user/update/:id" element={<UpdateUser />}></Route>
       </Routes>
       </BrowserRouter>
       <ToastContainer />
     </div>
+    </Provider>
   );
 }
 

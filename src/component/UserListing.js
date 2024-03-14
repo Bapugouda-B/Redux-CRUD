@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { fetchUserList } from '../Redux/Actions.js'
+import { connect } from 'react-redux'
 
-function UserListing() {
+function UserListing({loadUsers}) {
+  useEffect(()=>{
+    loadUsers();
+  },[loadUsers]);
   return (
     <div>
       <div className="card">
@@ -28,4 +33,16 @@ function UserListing() {
   )
 }
 
-export default UserListing
+const mapStateToProps = (state) =>{
+  return{
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    loadUsers: () => dispatch(fetchUserList())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (UserListing)

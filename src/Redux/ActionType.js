@@ -1,0 +1,3 @@
+export const MAKE_REQUEST='MAKE_REQUEST';
+export const FAIL_REQUEST='MAKE_REQUEST';
+export const GET_USER_LIST='MAKE_REQUEST';

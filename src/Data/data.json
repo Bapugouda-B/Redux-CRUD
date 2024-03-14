@@ -1,5 +1,13 @@
 {
-    "user":[
+    "user": [
+        {
+            "id":1,
+            "name":"Student",
+            "father":"Student",
+            "email":"admin@example.",
+            "phone":"9999999999",
+            "role":"admin"
+        },
         {
             "id":1,
             "name":"Student",
