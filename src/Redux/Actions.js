@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType.js";
 
+// action cretor functions
 export const getRequest = () => {
   return {
     type: MAKE_REQUEST,
@@ -10,14 +11,14 @@ export const getRequest = () => {
 export const failedRequest = (error) => {
   return {
     type: FAIL_REQUEST,
-    paylod: error,
+    payload: error,
   };
 };
 
 export const getUserList = (data) => {
   return {
     type: GET_USER_LIST,
-    paylod: data,
+    payload: data,
   };
 };
 

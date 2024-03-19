@@ -22,7 +22,6 @@ export const Reducer = (state = initialState, action) => {
       };
     case GET_USER_LIST:
         return {
-            ...state,
             loading: false,
             errorMessage: '',
             userList: action.payload,
