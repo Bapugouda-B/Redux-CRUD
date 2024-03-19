@@ -1,12 +1,22 @@
 import React, { useEffect } from "react";
-import { fetchUserList } from "../Redux/Actions.js";
+import { RemoveUser, fetchUserList } from "../Redux/Actions.js";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserListing = (props) => {
   useEffect(() => {
     props.loadUsers();
   }, [])
+
+  const handleDelete = (code) => {
+      if(window.confirm('Are you sure you want to delete')){
+        props.removeuser(code);
+        props.loadUsers();
+        toast.success("User deleted successfully")
+      }
+  }
+
   return ( 
     props.user.loading ? 
     <div>
@@ -21,6 +31,11 @@ const UserListing = (props) => {
       <div className="card">
         <div className="card-header">
           <h2>User Listing </h2>
+        </div>
+        <div style={{textAlign:"right"}}>
+
+        <Link to={"/user/add"} className="btn btn-success" >Add user</Link>
+
         </div>
         <div className="card-body">
           <table className="table table-bordered">
@@ -45,8 +60,8 @@ const UserListing = (props) => {
                   <td>{item.phone}</td>
                   <td>{item.role}</td>
                   <td>
-                    <Link className="btn btn-primary">Edit</Link>
-                    <button className="btn btn-danger">Delete</button>
+                    <Link to={"/user/edit/"+item.id} className="btn btn-primary">Edit</Link>
+                    <button onClick={()=>handleDelete(item.id)} className="btn btn-danger">Delete</button>
                     </td>
                 </tr>)
               }
@@ -67,6 +82,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadUsers: () => dispatch(fetchUserList()),
+    removeuser: (code) => dispatch(RemoveUser(code)),
   };
 };
 

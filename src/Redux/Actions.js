@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType.js";
+import { DELETE_USER, FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType.js";
 
 // action cretor functions
 export const getRequest = () => {
@@ -31,6 +31,27 @@ export const fetchUserList = (data) => {
       .then((response) => {
         const userList = response.data;
         dispatch(getUserList(userList));
+      })
+      .catch((error) => {
+        dispatch(failedRequest(error.message));
+      });
+  };
+};
+
+
+export const deleteRequest = () => {
+  return {
+    type: DELETE_USER,
+  };
+};
+
+export const RemoveUser = (code) => {
+  return (dispatch) => {
+    dispatch(deleteRequest());
+    axios
+      .delete("http://localhost:8080/user/"+code)
+      .then((response) => {
+        dispatch(deleteRequest());
       })
       .catch((error) => {
         dispatch(failedRequest(error.message));
