@@ -7,6 +7,14 @@
       "email": "admin@example.",
       "phone": "9999999999",
       "role": "admin"
+    },
+    {
+      "id": "2d00",
+      "name": "bapu",
+      "father": "mallanagouda",
+      "email": "raj@gmail.com",
+      "phone": "9742056505",
+      "role": "commerces"
     }
   ]
 }

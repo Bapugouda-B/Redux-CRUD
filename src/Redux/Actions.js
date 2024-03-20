@@ -1,8 +1,8 @@
 import axios from "axios";
-import { DELETE_USER, FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType.js";
+import { ADD_STUDENT, DELETE_USER, FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType.js";
 
 // action cretor functions
-export const getRequest = () => {
+export const makeRequest = () => {
   return {
     type: MAKE_REQUEST,
   };
@@ -25,7 +25,7 @@ export const getUserList = (data) => {
 // action dispatch function
 export const fetchUserList = (data) => {
   return (dispatch) => {
-    dispatch(getRequest());
+    dispatch(makeRequest());
     axios
       .get("http://localhost:8080/user")
       .then((response) => {
@@ -45,9 +45,11 @@ export const deleteRequest = () => {
   };
 };
 
+
+
 export const RemoveUser = (code) => {
   return (dispatch) => {
-    dispatch(deleteRequest());
+    dispatch(makeRequest());
     axios
       .delete("http://localhost:8080/user/"+code)
       .then((response) => {
@@ -58,3 +60,21 @@ export const RemoveUser = (code) => {
       });
   };
 };
+
+
+export const addStudent = (data) => {
+  return{
+    type: ADD_STUDENT,
+  }
+}
+
+export const addStudentData = (data) => {
+  return (dispatch) => {
+    dispatch(makeRequest());
+    axios.post("http://localhost:8080/user", data).then((response)=>{
+      dispatch(addStudent());
+    }).catch((error) => {
+      dispatch(failedRequest(error.message));
+    })
+  }
+}

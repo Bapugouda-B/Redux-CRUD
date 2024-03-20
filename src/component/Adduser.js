@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { addStudentData } from "../Redux/Actions.js";
 
 function Adduser() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [father, setFather] = useState("");
   const [email, setEmail] = useState("");
@@ -13,8 +17,8 @@ function Adduser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(studentObject);
+    dispatch(addStudentData(studentObject));
+    navigate("/user");
   };
 
   return (
@@ -78,8 +82,8 @@ function Adduser() {
                     onChange={(e) => setRole(e.target.value)}
                     className="form-control"
                   >
-                    <option value="Class Leader">Sceince</option>
-                    <option value="Class Leader">Commerce</option>
+                    <option value="science">Science</option>
+                    <option value="commerces">Commerce</option>
                   </select>
                 </div>
               </div>

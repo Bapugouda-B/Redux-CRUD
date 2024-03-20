@@ -10,11 +10,13 @@ const UserListing = (props) => {
   }, [])
 
   const handleDelete = (code) => {
+
       if(window.confirm('Are you sure you want to delete')){
         props.removeuser(code);
         props.loadUsers();
         toast.success("User deleted successfully")
       }
+      window.location.reload();
   }
 
   return ( 
@@ -30,11 +32,11 @@ const UserListing = (props) => {
     <div>
       <div className="card">
         <div className="card-header">
-          <h2>User Listing </h2>
+          <h2>Student Listing </h2>
         </div>
-        <div style={{textAlign:"right"}}>
+        <div style={{marginTop:"15px"}}>
 
-        <Link to={"/user/add"} className="btn btn-success" >Add user</Link>
+        <Link to={"/user/add"} className="btn btn-success" >Add Student Details</Link>
 
         </div>
         <div className="card-body">
@@ -59,9 +61,9 @@ const UserListing = (props) => {
                   <td>{item.email}</td>
                   <td>{item.phone}</td>
                   <td>{item.role}</td>
-                  <td>
+                  <td >
                     <Link to={"/user/edit/"+item.id} className="btn btn-primary">Edit</Link>
-                    <button onClick={()=>handleDelete(item.id)} className="btn btn-danger">Delete</button>
+                    <button onClick={()=>handleDelete(item.id)} className="btn btn-danger mx-4">Delete</button>
                     </td>
                 </tr>)
               }
